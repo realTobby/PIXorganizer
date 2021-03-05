@@ -59,11 +59,11 @@ namespace PIXOrganizer.ViewModels
         public void PreLoadPictures()
         {
             step1 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep1.png"));
-            step2 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep2.png"));
-            step3 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep3.png"));
-            step4 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep4.png"));
-            step5 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep5.png"));
-            stepFinish = ToBitmapImage(new Bitmap("Assets/SetupImages/setupFinish.png"));
+            //step2 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep2.png"));
+            //step3 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep3.png"));
+            //step4 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep4.png"));
+            //step5 = ToBitmapImage(new Bitmap("Assets/SetupImages/setupStep5.png"));
+            //stepFinish = ToBitmapImage(new Bitmap("Assets/SetupImages/setupFinish.png"));
 
         }
 

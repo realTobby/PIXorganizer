@@ -1,0 +1,52 @@
+﻿<Window x:Class="PORG.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PORG"
+        mc:Ignorable="d"
+        Title="PORG" Height="450" Width="800">
+  <Grid x:Name="windowGrid">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="15*"/>
+      <RowDefinition Height="85*"/>
+    </Grid.RowDefinitions>
+    
+    <Grid x:Name="topGrid" Grid.Row="0">
+      <StackPanel Orientation="Horizontal">
+        <TextBox Width="Auto" MinWidth="250" Height="30" Margin="10,0,0,0" Text="{Binding CurrentDirectory}"/>
+        <Button x:Name="btn_find" Content="..." MinWidth="50" Height="35" Margin="10,0,0,0" Click="btn_find_Click"/>
+      </StackPanel>
+    </Grid>
+
+    <Grid x:Name="mainGrid" Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="30*"/>
+        <ColumnDefinition Width="10*"/>
+        <ColumnDefinition Width="60*"/>
+      </Grid.ColumnDefinitions>
+      <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="1" Grid.Column="0" CornerRadius="20">
+        <StackPanel   Margin="10,10,10,10">
+          <ListBox x:Name="listBox_groups" Height="250" ItemsSource="{Binding CurrentGroups}"/>
+          <TextBox x:Name="textBox_newgroup" Height="25" Margin="10,10,10,10"/>
+          <StackPanel Orientation="Horizontal" x:Name="groupControls" HorizontalAlignment="Center">
+            <Button x:Name="btn_add_group" Content="Add" Margin="15,5,15,0" Click="btn_add_group_Click"/>
+            <Button x:Name="btn_rename_group" Content="Rename" Margin="15,5,15,0" Click="btn_rename_group_Click"/>
+            <Button x:Name="btn_remove_group" Content="Remove" Margin="15,5,15,0" Click="btn_remove_group_Click"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="2" CornerRadius="20">
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Organize!"/>
+      </Border>
+
+      <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="2" CornerRadius="20">
+        <Image Source="{Binding CurrentImageSource}"/>
+      </Border>
+    </Grid>
+
+    
+
+  </Grid>
+</Window>
