@@ -4,10 +4,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace PORG.ViewModels
 {
+  public enum MessageLevel
+  {
+    Information,
+    Warning,
+    Error
+  }
+
   public class ViewModel : BaseViewModel
   {
     private string currentDirectory = "";
@@ -23,6 +31,9 @@ namespace PORG.ViewModels
       set
       {
         currentDirectory = value;
+
+
+
         base.RaisePropertyChange(nameof(CurrentDirectory));
       }
     }
@@ -36,6 +47,7 @@ namespace PORG.ViewModels
       set
       {
         nextImagePath = value;
+        CurrentImageSource = new BitmapImage(new Uri(NextImagePath));
         base.RaisePropertyChange(nameof(NextImagePath));
       }
     }
@@ -46,6 +58,10 @@ namespace PORG.ViewModels
         if(NextImagePath != string.Empty)
           return new BitmapImage(new Uri(NextImagePath));
         return new BitmapImage();
+      }
+      set
+      {
+        base.RaisePropertyChange(nameof(CurrentImageSource));
       }
     }
 
@@ -59,6 +75,35 @@ namespace PORG.ViewModels
       {
         currentGroups = value;
         base.RaisePropertyChange(nameof(CurrentGroups));
+      }
+    }
+
+    private string lastErrorMessage = string.Empty;
+    public string CurrentErrorMessage
+    {
+      get
+      {
+        return lastErrorMessage;
+      }
+      set
+      {
+        lastErrorMessage = value;
+        base.RaisePropertyChange(nameof(CurrentErrorMessage));
+      }
+    }
+
+    private bool isGroupNameSelected = false;
+
+    public bool IsGroupNameSelected
+    {
+      get
+      {
+        return isGroupNameSelected;
+      }
+      set
+      {
+        isGroupNameSelected = value;
+        base.RaisePropertyChange(nameof(IsGroupNameSelected));
       }
     }
 

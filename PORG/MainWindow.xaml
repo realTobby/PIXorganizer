@@ -16,6 +16,7 @@
       <StackPanel Orientation="Horizontal">
         <TextBox Width="Auto" MinWidth="250" Height="30" Margin="10,0,0,0" Text="{Binding CurrentDirectory}"/>
         <Button x:Name="btn_find" Content="..." MinWidth="50" Height="35" Margin="10,0,0,0" Click="btn_find_Click"/>
+        <Label x:Name="lbl_messageViewer" Content="{Binding CurrentErrorMessage}" Foreground="Black" VerticalAlignment="Center"/>
       </StackPanel>
     </Grid>
 
@@ -27,7 +28,7 @@
       </Grid.ColumnDefinitions>
       <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="1" Grid.Column="0" CornerRadius="20">
         <StackPanel   Margin="10,10,10,10">
-          <ListBox x:Name="listBox_groups" Height="250" ItemsSource="{Binding CurrentGroups}"/>
+          <ListBox x:Name="listBox_groups" Height="250" ItemsSource="{Binding CurrentGroups}" SelectionChanged="listBox_groups_SelectionChanged"/>
           <TextBox x:Name="textBox_newgroup" Height="25" Margin="10,10,10,10"/>
           <StackPanel Orientation="Horizontal" x:Name="groupControls" HorizontalAlignment="Center">
             <Button x:Name="btn_add_group" Content="Add" Margin="15,5,15,0" Click="btn_add_group_Click"/>
@@ -38,7 +39,7 @@
       </Border>
 
       <Border Grid.Row="1" Grid.Column="1" BorderBrush="LightGray" BorderThickness="2" CornerRadius="20">
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Organize!"/>
+        <Button x:Name="btn_organize" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Organize!" Click="btn_organize_Click" IsEnabled="{Binding IsGroupNameSelected}"/>
       </Border>
 
       <Border Grid.Row="1" Grid.Column="2" BorderBrush="LightGray" BorderThickness="2" CornerRadius="20">

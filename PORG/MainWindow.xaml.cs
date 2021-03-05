@@ -24,7 +24,7 @@ namespace PORG
 
     private ViewModels.ViewModel myViewModel;
 
-    private DirectoryAndFileSystem dafs = new DirectoryAndFileSystem();
+    private DirectoryAndFileSystem directoryAndFileSystem = new DirectoryAndFileSystem();
 
     public MainWindow()
     {
@@ -32,25 +32,63 @@ namespace PORG
 
       myViewModel = new ViewModels.ViewModel();
       this.DataContext = myViewModel;
+
+      directoryAndFileSystem.Init();
+      myViewModel.CurrentGroups = directoryAndFileSystem.GroupNames;
     }
 
     private void btn_find_Click(object sender, RoutedEventArgs e)
     {
-      myViewModel.CurrentDirectory = dafs.GetMainDirectory();
+      myViewModel.CurrentDirectory = directoryAndFileSystem.GetMainDirectory();
+      directoryAndFileSystem.LoadImagesFromDirectory(myViewModel.CurrentDirectory, "*.PNG,*.JPG,*.GIF");
+      myViewModel.NextImagePath = directoryAndFileSystem.imagePaths[directoryAndFileSystem.currentImageIndex];
     }
 
     private void btn_add_group_Click(object sender, RoutedEventArgs e)
     {
-      myViewModel.CurrentGroups = dafs.AddGroup(myViewModel.CurrentGroups, textBox_newgroup.Text);
+      myViewModel.CurrentGroups = directoryAndFileSystem.AddGroup(myViewModel.CurrentGroups, textBox_newgroup.Text);
+      CheckForInformations();
     }
 
     private void btn_rename_group_Click(object sender, RoutedEventArgs e)
     {
+
     }
 
     private void btn_remove_group_Click(object sender, RoutedEventArgs e)
     {
+      myViewModel.CurrentGroups = directoryAndFileSystem.RemoveGroup(myViewModel.CurrentGroups, listBox_groups.SelectedItem.ToString());
+      CheckForInformations();
+    }
 
+    private void CheckForInformations()
+    {
+      if(directoryAndFileSystem.Message != string.Empty)
+      {
+        myViewModel.CurrentErrorMessage = directoryAndFileSystem.Message;
+      }
+      directoryAndFileSystem.Message = string.Empty;
+    }
+
+    private void btn_organize_Click(object sender, RoutedEventArgs e)
+    {
+      // determine group
+      string groupToOrganizeTO = myViewModel.CurrentGroups[listBox_groups.SelectedIndex];
+      directoryAndFileSystem.Organize(myViewModel.NextImagePath, groupToOrganizeTO);
+      myViewModel.NextImagePath = directoryAndFileSystem.imagePaths[directoryAndFileSystem.currentImageIndex];
+      CheckForInformations();
+    }
+
+    private void listBox_groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      if(listBox_groups.SelectedItems.Count == 1)
+      {
+        myViewModel.IsGroupNameSelected = true;
+      }
+      else
+      {
+        myViewModel.IsGroupNameSelected = false;
+      }
     }
   }
 }
