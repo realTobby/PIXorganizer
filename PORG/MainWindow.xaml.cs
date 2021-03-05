@@ -48,6 +48,7 @@ namespace PORG
     {
       myViewModel.CurrentGroups = directoryAndFileSystem.AddGroup(myViewModel.CurrentGroups, textBox_newgroup.Text);
       CheckForInformations();
+      textBox_newgroup.Text = string.Empty;
     }
 
     private void btn_rename_group_Click(object sender, RoutedEventArgs e)

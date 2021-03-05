@@ -87,15 +87,13 @@ namespace PORG.Logic
 
       foreach(string seatchOption in sp)
       {
-        var results = System.IO.Directory.GetFiles(path, seatchOption, System.IO.SearchOption.TopDirectoryOnly);
+        var results = System.IO.Directory.GetFiles(path, seatchOption, System.IO.SearchOption.AllDirectories);
         foreach (var res in results)
         {
           imagePaths.Add(res);
         }
       }
-
       currentImageIndex = 0;
-      
     }
 
     public void Organize(string imagePath, string targetDirectory)
@@ -103,11 +101,13 @@ namespace PORG.Logic
       string fileName = System.IO.Path.GetFileName(imagePath);
       System.IO.File.Copy(imagePath, BASE_DIRECTORY + "/" + targetDirectory + "/" + fileName);
       currentImageIndex++;
-      if(currentImageIndex >= imagePath.Count())
+      if(currentImageIndex >= imagePaths.Count()-1)
       {
         Message = "Hinweis: alle Bilder im Verzeichnis wurden verarbeitet!";
+        imagePaths.Clear();
         currentImageIndex = 0;
       }
+      Message = string.Format("Hinweis: Bild wurde der Gruppe '{0}' zugewiesen!", targetDirectory);
     }
   }
 }
